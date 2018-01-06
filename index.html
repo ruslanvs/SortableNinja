@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sortable Ninja</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        li {
+            margin: 0px;
+            padding: 0px;
+            /* width: 150px; */
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#sortableNinja").sortable({
+                revert: true
+            });
+            $("ul, li").disableSelection();
+        });
+    </script>
+</head>
+
+<body>
+
+    <ul id="sortableNinja">
+        <li><img src="images/sort1.png" alt=""></li><li>
+            <img src="images/sort2.png" alt="">
+        </li>
+        <li>
+            <img src="images/sort3.png" alt="">
+        </li>
+        <li>
+            <img src="images/sort4.png" alt="">
+        </li>
+        <li>
+            <img src="images/sort5.png" alt="">
+        </li>
+    </ul>
+    <button id="resetButton">SHUFFLE!</button>
+
+    <script>
+        // generate a random number from a given range
+        function randomNumberBetween( min, max ) {
+            return Math.random() * ( max - min ) + min;
+        }
+
+        var allImagesArray = document.getElementsByTagName( "img" );
+        var randomIndex, currentImageSrc, randomImageSrc;
+        
+        document.getElementById( "resetButton" ).onclick = function() {
+            
+            for( var i = 0, imagesArrayLength = allImagesArray.length; i < imagesArrayLength; i++){
+                currentImageSrc = allImagesArray[i].src;
+
+                randomIndex = Math.floor( randomNumberBetween( i + 1, imagesArrayLength - 1 ));
+                randomImageSrc = allImagesArray[randomIndex].src;
+
+                allImagesArray[i].src = randomImageSrc;
+                allImagesArray[randomIndex].src = currentImageSrc;
+            }
+        }
+        
+    </script>
+    
+</body>
+</html>
